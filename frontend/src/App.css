@@ -1,34 +1,238 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for the MeatSafe Check app */
+.App {
+  min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Smooth transitions for interactive elements */
+* {
+  transition: all 0.2s ease-in-out;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+/* Custom button hover effects */
+.btn-primary {
+  @apply bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors;
 }
 
-.App-link {
-    color: #61dafb;
+.btn-secondary {
+  @apply bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* File upload styling */
+input[type="file"] {
+  @apply file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100;
+}
+
+/* Quiz progress bar animation */
+.progress-bar {
+  transition: width 0.3s ease-in-out;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transform hover:scale-105 transition-transform duration-200;
+}
+
+/* Status badges */
+.status-pending {
+  @apply bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-sm font-medium;
+}
+
+.status-approved {
+  @apply bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm font-medium;
+}
+
+.status-rejected {
+  @apply bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm font-medium;
+}
+
+/* Navigation styling */
+nav {
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Form focus states */
+input:focus, textarea:focus, select:focus {
+  @apply outline-none ring-2 ring-red-500 ring-opacity-50;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-red-600;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Animation for success/error messages */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Quiz question styling */
+.quiz-option {
+  @apply p-3 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors;
+}
+
+.quiz-option:hover {
+  @apply border-red-300 bg-red-50;
+}
+
+.quiz-option input[type="radio"]:checked + span {
+  @apply text-red-700 font-medium;
+}
+
+/* File upload area styling */
+.upload-area {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-red-400 hover:bg-red-50 transition-colors;
+}
+
+.upload-area.dragover {
+  @apply border-red-500 bg-red-100;
+}
+
+/* Admin panel styling */
+.admin-card {
+  @apply bg-white p-6 rounded-lg shadow-md border-l-4 border-red-600;
+}
+
+/* Notification styling */
+.notification {
+  @apply fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50;
+}
+
+.notification.success {
+  @apply bg-green-100 border border-green-400 text-green-700;
+}
+
+.notification.error {
+  @apply bg-red-100 border border-red-400 text-red-700;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .container {
+    @apply px-2;
+  }
+  
+  .grid {
+    @apply gap-4;
+  }
+  
+  .text-5xl {
+    @apply text-3xl;
+  }
+  
+  .text-3xl {
+    @apply text-2xl;
+  }
+  
+  .px-8 {
+    @apply px-4;
+  }
+  
+  .py-16 {
+    @apply py-8;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break {
+    page-break-after: always;
+  }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus indicators for keyboard navigation */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @apply outline-2 outline-red-600 outline-offset-2;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-red-600 {
+    @apply bg-red-800;
+  }
+  
+  .text-gray-600 {
+    @apply text-gray-900;
+  }
+  
+  .border-gray-300 {
+    @apply border-gray-600;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode styles (if needed in future) */
+@media (prefers-color-scheme: dark) {
+  /* Dark mode styles can be added here */
 }
