@@ -347,10 +347,11 @@ async def update_user_status(user_id: str, user_update: UserUpdate, request: Req
 # File upload routes
 @api_router.post("/compliance/upload")
 async def upload_compliance_file(
+    request: Request,
     file: UploadFile = File(...),
     description: str = Form("")
 ):
-    current_user = await get_current_user()
+    current_user = await get_current_user(request)
     if not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")
     if current_user.status != UserStatus.APPROVED:
@@ -389,8 +390,8 @@ async def upload_compliance_file(
     return upload
 
 @api_router.get("/compliance/uploads", response_model=List[ComplianceUpload])
-async def get_compliance_uploads():
-    current_user = await get_current_user()
+async def get_compliance_uploads(request: Request):
+    current_user = await get_current_user(request)
     if not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")
     if current_user.status != UserStatus.APPROVED:
@@ -400,8 +401,8 @@ async def get_compliance_uploads():
     return [ComplianceUpload(**upload) for upload in uploads]
 
 @api_router.get("/compliance/file/{file_id}")
-async def get_compliance_file(file_id: str):
-    current_user = await get_current_user()
+async def get_compliance_file(file_id: str, request: Request):
+    current_user = await get_current_user(request)
     if not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")
     
