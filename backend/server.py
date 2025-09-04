@@ -202,31 +202,6 @@ async def get_current_user(request: Request):
     user = await db.users.find_one({"id": session["user_id"]})
     return User(**user) if user else None
 
-async def require_auth():
-    def decorator(func):
-        async def wrapper(*args, **kwargs):
-            # Extract user from kwargs (FastAPI dependency injection)
-            user = kwargs.get('current_user')
-            if not user:
-                raise HTTPException(status_code=401, detail="Authentication required")
-            if user.status != UserStatus.APPROVED:
-                raise HTTPException(status_code=403, detail="Account pending approval")
-            return await func(*args, **kwargs)
-        return wrapper
-    return decorator
-
-async def require_admin():
-    def decorator(func):
-        async def wrapper(*args, **kwargs):
-            user = kwargs.get('current_user')
-            if not user:
-                raise HTTPException(status_code=401, detail="Authentication required")
-            # Check if user is admin (you can modify this logic)
-            if user.email != "admin@meatsafe.com":  # Simple admin check
-                raise HTTPException(status_code=403, detail="Admin access required")
-            return await func(*args, **kwargs)
-        return wrapper
-    return decorator
 
 # Authentication routes
 @api_router.get("/auth/login")
