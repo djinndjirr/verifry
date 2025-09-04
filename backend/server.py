@@ -422,8 +422,8 @@ async def get_compliance_file(file_id: str, request: Request):
 
 # Quiz routes
 @api_router.get("/quiz/questions")
-async def get_quiz_questions():
-    current_user = await get_current_user()
+async def get_quiz_questions(request: Request):
+    current_user = await get_current_user(request)
     if not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")
     if current_user.status != UserStatus.APPROVED:
@@ -440,8 +440,8 @@ async def get_quiz_questions():
     return questions
 
 @api_router.post("/quiz/submit")
-async def submit_quiz(quiz_attempt: QuizAttemptCreate):
-    current_user = await get_current_user()
+async def submit_quiz(quiz_attempt: QuizAttemptCreate, request: Request):
+    current_user = await get_current_user(request)
     if not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")
     if current_user.status != UserStatus.APPROVED:
@@ -477,8 +477,8 @@ async def submit_quiz(quiz_attempt: QuizAttemptCreate):
     return attempt
 
 @api_router.get("/quiz/attempts", response_model=List[QuizAttempt])
-async def get_quiz_attempts():
-    current_user = await get_current_user()
+async def get_quiz_attempts(request: Request):
+    current_user = await get_current_user(request)
     if not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")
     if current_user.status != UserStatus.APPROVED:
@@ -489,8 +489,8 @@ async def get_quiz_attempts():
 
 # Admin analytics routes
 @api_router.get("/admin/analytics")
-async def get_analytics():
-    current_user = await get_current_user()
+async def get_analytics(request: Request):
+    current_user = await get_current_user(request)
     if not current_user or current_user.email != "admin@meatsafe.com":
         raise HTTPException(status_code=403, detail="Admin access required")
     
