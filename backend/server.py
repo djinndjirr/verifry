@@ -290,18 +290,15 @@ async def logout(current_user: User = None):
 
 # User management routes
 @api_router.get("/users/me")
-async def get_current_user_info():
-    async def handler(current_user: User):
-        return current_user
-    
-    user = await get_current_user()
+async def get_current_user_info(request: Request):
+    user = await get_current_user(request)
     if not user:
         raise HTTPException(status_code=401, detail="Authentication required")
     return user
 
 @api_router.put("/users/me")
-async def update_current_user(user_update: dict):
-    current_user = await get_current_user()
+async def update_current_user(user_update: dict, request: Request):
+    current_user = await get_current_user(request)
     if not current_user:
         raise HTTPException(status_code=401, detail="Authentication required")
     
@@ -317,8 +314,8 @@ async def update_current_user(user_update: dict):
 
 # Admin routes
 @api_router.get("/admin/users", response_model=List[User])
-async def get_all_users():
-    current_user = await get_current_user()
+async def get_all_users(request: Request):
+    current_user = await get_current_user(request)
     if not current_user or current_user.email != "admin@meatsafe.com":
         raise HTTPException(status_code=403, detail="Admin access required")
     
@@ -326,8 +323,8 @@ async def get_all_users():
     return [User(**user) for user in users]
 
 @api_router.put("/admin/users/{user_id}")
-async def update_user_status(user_id: str, user_update: UserUpdate):
-    current_user = await get_current_user()
+async def update_user_status(user_id: str, user_update: UserUpdate, request: Request):
+    current_user = await get_current_user(request)
     if not current_user or current_user.email != "admin@meatsafe.com":
         raise HTTPException(status_code=403, detail="Admin access required")
     
