@@ -180,7 +180,10 @@ QUIZ_QUESTIONS = [
 ]
 
 # Authentication helper functions
-async def get_current_user(authorization: Optional[str] = Header(None), session_token: Optional[str] = Cookie(None)):
+async def get_current_user(request: Request):
+    authorization = request.headers.get("authorization")
+    session_token = request.cookies.get("session_token")
+    
     token = None
     if authorization and authorization.startswith("Bearer "):
         token = authorization.split(" ")[1]
