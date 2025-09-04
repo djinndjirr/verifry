@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for the MeatSafe Check app */
+/* Custom styles for the MeatSafe Check app - Green & Grey Theme */
 .App {
   min-height: 100vh;
 }
@@ -14,7 +14,7 @@
 
 /* Custom button hover effects */
 .btn-primary {
-  @apply bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors;
+  @apply bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors;
 }
 
 .btn-secondary {
@@ -23,7 +23,7 @@
 
 /* File upload styling */
 input[type="file"] {
-  @apply file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100;
+  @apply file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100;
 }
 
 /* Quiz progress bar animation */
@@ -57,12 +57,12 @@ nav {
 
 /* Form focus states */
 input:focus, textarea:focus, select:focus {
-  @apply outline-none ring-2 ring-red-500 ring-opacity-50;
+  @apply outline-none ring-2 ring-green-500 ring-opacity-50;
 }
 
 /* Loading spinner */
 .spinner {
-  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-red-600;
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-green-600;
 }
 
 /* Custom scrollbar */
@@ -114,25 +114,25 @@ input:focus, textarea:focus, select:focus {
 }
 
 .quiz-option:hover {
-  @apply border-red-300 bg-red-50;
+  @apply border-green-300 bg-green-50;
 }
 
 .quiz-option input[type="radio"]:checked + span {
-  @apply text-red-700 font-medium;
+  @apply text-green-700 font-medium;
 }
 
 /* File upload area styling */
 .upload-area {
-  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-red-400 hover:bg-red-50 transition-colors;
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-green-400 hover:bg-green-50 transition-colors;
 }
 
 .upload-area.dragover {
-  @apply border-red-500 bg-red-100;
+  @apply border-green-500 bg-green-100;
 }
 
 /* Admin panel styling */
 .admin-card {
-  @apply bg-white p-6 rounded-lg shadow-md border-l-4 border-red-600;
+  @apply bg-white p-6 rounded-lg shadow-md border-l-4 border-green-600;
 }
 
 /* Notification styling */
@@ -205,13 +205,13 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  @apply outline-2 outline-red-600 outline-offset-2;
+  @apply outline-2 outline-green-600 outline-offset-2;
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  .bg-red-600 {
-    @apply bg-red-800;
+  .bg-green-600 {
+    @apply bg-green-800;
   }
   
   .text-gray-600 {

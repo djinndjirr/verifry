@@ -94,7 +94,7 @@ const Navbar = () => {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="bg-red-600 text-white p-4 shadow-lg">
+    <nav className="bg-green-600 text-white p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-xl font-bold flex items-center">
           🥩 MeatSafe Check
@@ -110,11 +110,11 @@ const Navbar = () => {
                 <span className="bg-green-500 px-2 py-1 rounded text-xs">Approved</span>
               )}
               {user.email === 'admin@meatsafe.com' && (
-                <Link to="/admin" className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
+                <Link to="/admin" className="bg-gray-600 px-3 py-1 rounded hover:bg-gray-700">
                   Admin
                 </Link>
               )}
-              <button onClick={logout} className="bg-red-700 px-3 py-1 rounded hover:bg-red-800">
+              <button onClick={logout} className="bg-green-700 px-3 py-1 rounded hover:bg-green-800">
                 Logout
               </button>
             </>
@@ -145,7 +145,7 @@ const Home = () => {
           {!user && (
             <button
               onClick={login}
-              className="bg-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors"
+              className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
             >
               Get Started - Restaurant Login
             </button>
@@ -154,7 +154,7 @@ const Home = () => {
           {user && user.status === 'approved' && (
             <Link
               to="/dashboard"
-              className="bg-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors inline-block"
+              className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors inline-block"
             >
               Go to Dashboard
             </Link>
@@ -286,7 +286,7 @@ const Profile = () => {
               value={restaurantName}
               onChange={(e) => setRestaurantName(e.target.value)}
               placeholder="Enter your restaurant name"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
           
@@ -306,7 +306,7 @@ const Profile = () => {
           <button
             onClick={updateProfile}
             disabled={updating || !restaurantName.trim()}
-            className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             {updating ? 'Updating...' : 'Update Profile'}
           </button>
@@ -328,7 +328,7 @@ const Dashboard = () => {
           <p className="text-gray-600 mb-8">
             Your account is waiting for admin approval. You'll receive access to all features once approved.
           </p>
-          <Link to="/profile" className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700">
+          <Link to="/profile" className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700">
             Update Profile
           </Link>
         </div>
@@ -450,7 +450,7 @@ const ComplianceUploads = () => {
         <button
           onClick={handleFileUpload}
           disabled={!selectedFile || uploading}
-          className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
         >
           {uploading ? 'Uploading...' : 'Upload File'}
         </button>
@@ -479,7 +479,7 @@ const ComplianceUploads = () => {
                   href={`${API}/compliance/file/${upload.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-red-600 hover:text-red-800 text-sm"
+                  className="text-green-600 hover:text-green-800 text-sm"
                 >
                   View File →
                 </a>
@@ -592,7 +592,7 @@ const Quiz = () => {
             <div className="space-x-4">
               <button
                 onClick={restartQuiz}
-                className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700"
+                className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700"
               >
                 Take Quiz Again
               </button>
@@ -647,7 +647,7 @@ const Quiz = () => {
                 </span>
                 <div className="w-48 bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-red-600 h-2 rounded-full transition-all duration-300"
+                    className="bg-green-600 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                   ></div>
                 </div>
@@ -687,7 +687,7 @@ const Quiz = () => {
                 <button
                   onClick={submitQuiz}
                   disabled={Object.keys(answers).length !== questions.length}
-                  className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   Submit Quiz
                 </button>
@@ -695,7 +695,7 @@ const Quiz = () => {
                 <button
                   onClick={() => setCurrentQuestion(Math.min(questions.length - 1, currentQuestion + 1))}
                   disabled={answers[questions[currentQuestion].id] === undefined}
-                  className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   Next
                 </button>
